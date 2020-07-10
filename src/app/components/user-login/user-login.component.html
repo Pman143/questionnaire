@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row my-row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <form [formGroup]="userLoginForm" (ngSubmit)="onSubmitForm(userLoginForm)">
+        <mat-form-field appearance="outline" class="field-width">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput placeholder="Please Enter Username" formControlName="username">
+          <mat-hint>eg test@test.com</mat-hint>
+        </mat-form-field>
+        <br>
+        <br>
+        <br>
+        <mat-form-field appearance="outline" class="field-width">
+          <mat-label>Password</mat-label>
+          <input [type]="hide ? 'password' : 'text'" matInput placeholder="Please Enter Password"
+                 formControlName="password">
+          <mat-icon style="cursor:pointer;" (click)="hide = !hide"
+                    matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-hint>eg test@test.com</mat-hint>
+        </mat-form-field>
+        <br>
+        <br>
+        <div class="row" style="margin-left: 3px;">
+          <button [disabled]="userLoginForm.invalid" type="submit" class="login-button" mat-raised-button
+                  color="primary">
+            Login
+          </button>
+          <div style="margin-left: 35px;" *ngIf="true">
+            <mat-spinner [strokeWidth]="5" [diameter]="40"></mat-spinner>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
