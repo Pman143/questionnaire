@@ -18,6 +18,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -38,9 +41,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     RouterModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
