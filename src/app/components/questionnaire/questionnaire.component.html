@@ -77,13 +77,14 @@
             </tr>
             </thead>
 
-            <tbody>
-            <tr *ngFor="let question of questions">
-              <td>{{question}}</td>
-              <td><mat-radio-group aria-label="Select an option" color="primary">
+            <tbody formArrayName="questionsAnswers">
+            <tr *ngFor="let question of questionnaireForm.get('questionsAnswers')['controls']; let i = index" [formGroupName]="i">
+              <td>{{question['controls']['question'].value}}</td>
+              <td><mat-radio-group aria-label="Select an option" color="primary" formControlName="answer">
                 <mat-radio-button value="1">Yes</mat-radio-button>&nbsp;
                 <mat-radio-button value="2">No</mat-radio-button>
               </mat-radio-group></td>
+              <input formControlName="question" type="text" hidden>
             </tr>
             </tbody>
           </table>
@@ -91,10 +92,11 @@
         </mat-expansion-panel>
       </mat-accordion>
       <br>
+      {{questionnaireForm.value | json}}
       <div class="row" style="margin-left: 3px;">
         <button [disabled]="questionnaireForm.invalid" type="submit" class="login-button" mat-raised-button
                 color="primary">
-          Login
+          Submit
         </button>
         <div style="margin-left: 35px;" *ngIf="false">
           <mat-spinner [strokeWidth]="5" [diameter]="40"></mat-spinner>

@@ -25,17 +25,40 @@ export class QuestionnaireComponent implements OnInit {
     'Can you taste food and drinks normally?',
     'Can you smell normally?',
   ];
+  questionsAnswers = [
+    new FormGroup({
+      question: new FormControl(this.questions[0], Validators.required),
+      answer: new FormControl(''),
+    }),
+    new FormGroup({
+      question: new FormControl(this.questions[1], Validators.required),
+      answer: new FormControl(''),
+    }),
+    new FormGroup({
+      question: new FormControl(this.questions[2], Validators.required),
+      answer: new FormControl(''),
+    }),
+    new FormGroup({
+      question: new FormControl(this.questions[3], Validators.required),
+      answer: new FormControl(''),
+    }),
+    new FormGroup({
+      question: new FormControl(this.questions[4], Validators.required),
+      answer: new FormControl(''),
+    }),
+    new FormGroup({
+      question: new FormControl(this.questions[5], Validators.required),
+      answer: new FormControl(''),
+    })
+  ];
   questionnaireForm: FormGroup;
   maxDate: Date;
   minDate: Date;
-  dateValue: any;
 
   constructor(private fb: FormBuilder) {
     const currentDate = new Date();
-    console.log(currentDate);
     this.maxDate = new Date(currentDate);
     this.minDate = new Date(currentDate);
-    this.dateValue = this.maxDate.toDateString();
   }
 
   ngOnInit(): void {
@@ -45,21 +68,9 @@ export class QuestionnaireComponent implements OnInit {
       lastName: new FormControl(null, Validators.required),
       class: new FormControl(null, Validators.required),
       date: new FormControl(this.maxDate.toISOString(), Validators.required),
-      questions: this.fb.array([]),
+      questionsAnswers: new FormArray(this.questionsAnswers),
     });
   }
-
-  get questionsList(): FormArray {
-    return this.questionnaireForm.get('questions') as FormArray;
-  }
-/*
-  onAnsweringQuestion() {
-    this.questionsList.push(this.fb.gr);
-  }
-
-  onQuestionChange(question: any) {
-    console.log(question);
-  }*/
 
   onTemperatureChange(val: number) {
     console.log(val);
