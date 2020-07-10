@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'school-screening-app-ui';
+
+  constructor(private route: Router) {
+  }
+
+  onLogin() {
+    this.route.navigate(['user-login']);
+  }
+
+  onRegister() {
+    this.route.navigate(['user-register']);
+  }
 }
