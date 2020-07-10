@@ -1,20 +1,21 @@
 <div class="container">
-  <div class="row" style="margin-top: 10%">
-    <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit(questionnaireForm)">
+  <div class="row" style="margin-top: 5%">
+    <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit(questionnaireForm)" style="width: 100%">
       <mat-accordion multi displayMode="flat">
         <mat-expansion-panel expanded="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Please capture all the fields.
+              Please complete all the fields.
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <div class="row">
             <mat-label style="font-size: 15px;margin-left: 17px;">Body Temperature
               Level: {{temperatureValue}}</mat-label>
-            <mat-slider formControlName="temperature" style="width: 70%;margin-left: 15px;margin-top: 5px;"
+            <mat-slider formControlName="temperature" style="width: 50%;margin-left: 15px;margin-top: 5px;"
                         color="primary" [thumbLabel]="true" [value]="temperatureValue"
                         (valueChange)="onTemperatureChange($event)"
+                        tabIndex="0.1"
                         min="0" max="200" step="0.1"></mat-slider>
           </div>
 
@@ -48,31 +49,58 @@
             </div>
 
             <div class="col">
-              <mat-form-field>
-                <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Enter Last Name">
+              <mat-form-field color="primary">
+                <mat-label>Date</mat-label>
+                <input [value]="questionnaireForm.get('date').value" (click)="picker.open()" [max]="maxDate" [min]="minDate" matInput [matDatepicker]="picker" formControlName="date" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker disabled="false"  #picker color="primary"></mat-datepicker>
               </mat-form-field>
             </div>
           </div>
-
-
         </mat-expansion-panel>
       </mat-accordion>
-      <br>
       <br>
       <mat-accordion multi displayMode="flat">
         <mat-expansion-panel expanded="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Self aware panel
+              Please answer all the questions.
             </mat-panel-title>
-            <mat-panel-description>
-              Currently I am {{true ? 'open' : 'closed'}}
-            </mat-panel-description>
           </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
+
+          <div class="row">
+          <table class="table table-responsive table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Questions</th>
+              <th>Yes/No</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let question of questions">
+              <td>{{question}}</td>
+              <td><mat-radio-group aria-label="Select an option" color="primary">
+                <mat-radio-button value="1">Yes</mat-radio-button>&nbsp;
+                <mat-radio-button value="2">No</mat-radio-button>
+              </mat-radio-group></td>
+            </tr>
+            </tbody>
+          </table>
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
+      <br>
+      <div class="row" style="margin-left: 3px;">
+        <button [disabled]="questionnaireForm.invalid" type="submit" class="login-button" mat-raised-button
+                color="primary">
+          Login
+        </button>
+        <div style="margin-left: 35px;" *ngIf="false">
+          <mat-spinner [strokeWidth]="5" [diameter]="40"></mat-spinner>
+        </div>
+      </div>
+      <br><br>
     </form>
   </div>
 </div>

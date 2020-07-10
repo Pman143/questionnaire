@@ -22,6 +22,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,9 @@ import {MatSelectModule} from '@angular/material/select';
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatSliderModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
