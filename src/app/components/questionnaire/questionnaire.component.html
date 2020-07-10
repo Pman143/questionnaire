@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row" style="margin-top: 10%">
-    <form>
+    <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit(questionnaireForm)">
       <mat-accordion multi displayMode="flat">
         <mat-expansion-panel expanded="true">
           <mat-expansion-panel-header>
@@ -10,8 +10,10 @@
           </mat-expansion-panel-header>
 
           <div class="row">
-            <mat-label style="font-size: 15px;margin-left: 17px;">Body Temperature Level: {{temperatureValue}}</mat-label>
-            <mat-slider style="width: 70%;margin-left: 15px;margin-top: 5px;" color="primary" [thumbLabel]="true" [value]="temperatureValue"
+            <mat-label style="font-size: 15px;margin-left: 17px;">Body Temperature
+              Level: {{temperatureValue}}</mat-label>
+            <mat-slider formControlName="temperature" style="width: 70%;margin-left: 15px;margin-top: 5px;"
+                        color="primary" [thumbLabel]="true" [value]="temperatureValue"
                         (valueChange)="onTemperatureChange($event)"
                         min="0" max="200" step="0.1"></mat-slider>
           </div>
@@ -20,14 +22,35 @@
             <div class="col">
               <mat-form-field>
                 <mat-label>First Name</mat-label>
-                <input matInput placeholder="Enter First Name">
+                <input matInput placeholder="Enter First Name" formControlName="firstName">
               </mat-form-field>
             </div>
 
             <div class="col">
               <mat-form-field>
                 <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Enter First Name">
+                <input matInput placeholder="Enter First Name" formControlName="lastName">
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Class</mat-label>
+                <mat-select formControlName="class">
+                  <mat-option>Choose class</mat-option>
+                  <mat-option *ngFor="let class of classes" [value]="class">
+                    {{class}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Enter Last Name">
               </mat-form-field>
             </div>
           </div>

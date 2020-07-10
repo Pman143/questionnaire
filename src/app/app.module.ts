@@ -21,6 +21,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {MatSliderModule} from '@angular/material/slider';
     MatDatepickerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatSliderModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
