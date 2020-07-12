@@ -58,15 +58,14 @@
       </div>
       <hr>
       <div class="row" *ngFor="let questionAnswer of learner?.questionsAnswers; let qa = index;">
-        <div class="col">
+        <div class="col" style="margin-bottom: 2%;">
           {{questionAnswer.question}}
         </div>
-        <div class="col">
+        <div class="col" style="margin-bottom: 2%;">
           <mat-radio-group disabled aria-label="Select an option" color="primary">
             <mat-radio-button [checked]="questionAnswer.answer.match('1')" value="1">Yes</mat-radio-button>&nbsp;
             <mat-radio-button [checked]="questionAnswer.answer.match('2')" value="2">No</mat-radio-button>
           </mat-radio-group>
-          <br>
         </div>
       </div>
     </mat-expansion-panel>
