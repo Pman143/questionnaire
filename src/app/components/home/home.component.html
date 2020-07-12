@@ -1,57 +1,83 @@
-<mat-tab-group (selectedTabChange)="onSelectGrade($event)">
-  <mat-tab *ngFor="let class of classes; let i = index" label="{{class}}" (click)="onGradeClick(class)">
-    <div class="mat-elevation-z8">
-      <br><br><br>
-      <mat-accordion *ngFor="let learner of userInfo; let i = index" displayMode="flat" [multi]="false"
-                     [hideToggle]="false">
-        <mat-expansion-panel [hideToggle]="false">
-          <mat-expansion-panel-header>
-              <h2>
-                {{i + 1}}
-              </h2>
+<br>
+<mat-form-field appearance="fill">
+  <mat-label>Choose Grade</mat-label>
+  <mat-select (valueChange)="onChangeGrade($event)">
+    <mat-option *ngFor="let class of classes" [value]="class">
+      {{class}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-              <h2 style="margin-left: 30%; margin-right: 30%;">
-                {{learner.firstName}} {{learner.lastName}}
-              </h2>
-              <h2>
-                {{learner.date.toString().substring(0, 10)}}
-              </h2>
+<br>
+<h2 *ngIf="!isLoading" style="margin-left: 45%;">Found {{userInfo.length}} Results.</h2>
 
-          </mat-expansion-panel-header>
-          <div class="row" style="font-weight: bolder">
-            <div class="col">First Name</div>
-            <div class="col">Last Name</div>
-            <div class="col">Date Recorded</div>
-            <div class="col">Phone Number(parent/guardian)</div>
-          </div>
+<div class="mat-elevation-z8" *ngIf="userInfo.length && !isLoading">
+  <br><br><br>
+  <mat-accordion *ngFor="let learner of userInfo; let i = index" displayMode="flat" [multi]="false"
+                 [hideToggle]="false">
+    <mat-expansion-panel [hideToggle]="false">
+      <mat-expansion-panel-header>
+        <h2>
+          {{i + 1}}
+        </h2>
 
-          <div class="row">
-            <div class="col">{{learner.firstName}}</div>
-            <div class="col">{{learner.lastName}}</div>
-            <div class="col">{{learner.date.toString().substring(0, 10)}}</div>
-            <div class="col">{{learner.parentPhoneNumber}}</div>
-          </div>
+        <h2 style="margin-left: 30%; margin-right: 30%;">
+          {{learner.firstName}} {{learner.lastName}}
+        </h2>
+        <h2>
+          {{learner.date.toString().substring(0, 10)}}
+        </h2>
+        <hr>
+      </mat-expansion-panel-header>
+
+      <div class="row" style="font-weight: bolder">
+        <div class="col">First Name</div>
+        <div class="col">Last Name</div>
+        <div class="col">Body Temperature(C)</div>
+      </div>
+
+      <div class="row">
+        <div class="col">{{learner.firstName}}</div>
+        <div class="col">{{learner.lastName}}</div>
+        <div class="col">{{learner.temperature}}</div>
+      </div>
+      <br>
+
+      <div class="row" style="font-weight: bolder">
+        <div class="col">Phone Number(parent)</div>
+        <div class="col">Date Recorded</div>
+        <div class="col"></div>
+      </div>
+
+      <div class="row">
+        <div class="col">{{learner.parentPhoneNumber}}</div>
+        <div class="col">{{learner.date.toString().substring(0, 10)}}</div>
+        <div class="col"></div>
+      </div>
+      <br>
+
+      <div class="row" style="font-weight: bolder">
+        <div class="col">Questions</div>
+        <div class="col">Answers</div>
+      </div>
+      <hr>
+      <div class="row" *ngFor="let questionAnswer of learner?.questionsAnswers; let qa = index;">
+        <div class="col">
+          {{questionAnswer.question}}
+        </div>
+        <div class="col">
+          <mat-radio-group disabled aria-label="Select an option" color="primary">
+            <mat-radio-button [checked]="questionAnswer.answer.match('1')" value="1">Yes</mat-radio-button>&nbsp;
+            <mat-radio-button [checked]="questionAnswer.answer.match('2')" value="2">No</mat-radio-button>
+          </mat-radio-group>
           <br>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <br>
+  </mat-accordion>
+</div>
 
-          <div class="row" style="font-weight: bolder">
-            <div class="col">Questions</div>
-            <div class="col">Answers</div>
-          </div>
-          <hr>
-          <div class="row" *ngFor="let questionAnswer of learner?.questionsAnswers; let qa = index;">
-            <div class="col">
-              {{questionAnswer.question}}
-            </div>
-            <div class="col">
-              <mat-radio-group disabled aria-label="Select an option" color="primary">
-                <mat-radio-button [checked]="questionAnswer.answer.match('1')" value="1">Yes</mat-radio-button>&nbsp;
-                <mat-radio-button [checked]="questionAnswer.answer.match('2')" value="2">No</mat-radio-button>
-              </mat-radio-group>
-              <br>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+<div style="margin-left: 45%;" class="container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

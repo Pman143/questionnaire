@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {MatTabChangeEvent} from '@angular/material/tabs';
+import {MatOptionSelectionChange} from '@angular/material/core';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   ];
   userInfo: any = [];
   searchTerm = 'Grade 1';
+  isLoading = false;
 
   constructor(private userService: UserService) {
   }
@@ -30,17 +32,17 @@ export class HomeComponent implements OnInit {
   getUserInfoByGrade(searchTerm: string) {
     this.userService.getUserInformation(searchTerm)
       .subscribe((res) => {
+        this.isLoading = false;
         this.userInfo = res;
         console.log(res);
       });
   }
 
-  onGradeClick(grade: string) {
-    console.log(grade);
-  }
-
-  onSelectGrade(event: MatTabChangeEvent) {
-    console.log(event.tab.textLabel);
-    this.getUserInfoByGrade(event.tab.textLabel);
+  onChangeGrade(event: any) {
+    this.isLoading = true;
+    this.userInfo = [];
+    setTimeout(() => {
+      this.getUserInfoByGrade(event);
+    }, 200);
   }
 }

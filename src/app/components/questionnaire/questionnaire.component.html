@@ -101,6 +101,7 @@
         </mat-expansion-panel>
       </mat-accordion>
       <br>
+      {{questionnaireForm.value | json}}
       <div class="row" style="margin-left: 3px;">
         <button [disabled]="questionnaireForm.invalid" type="submit" class="login-button" mat-raised-button
                 color="primary">
