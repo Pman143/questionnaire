@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
+import {MatTabChangeEvent} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-home',
@@ -17,37 +17,30 @@ export class HomeComponent implements OnInit {
     'Grade 6',
     'Grade 7',
   ];
-  displayedColumns: string[] = ['firstName', 'lastName'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  allData = ELEMENT_DATA;
+  userInfo: any = [];
+  searchTerm = 'Grade 1';
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  constructor() {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.getUserInfoByGrade(this.searchTerm);
   }
 
+  getUserInfoByGrade(searchTerm: string) {
+    this.userService.getUserInformation(searchTerm)
+      .subscribe((res) => {
+        this.userInfo = res;
+        console.log(res);
+      });
+  }
+
+  onGradeClick(grade: string) {
+    console.log(grade);
+  }
+
+  onSelectGrade(event: MatTabChangeEvent) {
+    console.log(event.tab.textLabel);
+    this.getUserInfoByGrade(event.tab.textLabel);
+  }
 }
-
-
-export interface PeriodicElement {
-  firstName: string;
-  lastName: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {firstName: 'Prince', lastName: 'Semenya'},
-  {firstName: 'Prince 1', lastName: 'Semenya'},
-  {firstName: 'Prince 2', lastName: 'Semenya'},
-  {firstName: 'Prince 3', lastName: 'Semenya'},
-  {firstName: 'Prince 4', lastName: 'Semenya'},
-  {firstName: 'Prince 5', lastName: 'Semenya'},
-  {firstName: 'Prince 6', lastName: 'Semenya'},
-  {firstName: 'Prince 7', lastName: 'Semenya'},
-  {firstName: 'Prince 8', lastName: 'Semenya'},
-  {firstName: 'Prince 9', lastName: 'Semenya'},
-  {firstName: 'Prince 10', lastName: 'Semenya'},
-];

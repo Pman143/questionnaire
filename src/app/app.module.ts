@@ -27,6 +27,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {HttpClientModule} from '@angular/common/http';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatFormFieldModule,
     MatIconModule,
@@ -60,6 +63,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

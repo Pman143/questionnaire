@@ -1,24 +1,82 @@
-    <mat-tab-group>
-      <mat-tab *ngFor="let class of classes; let i = index" label="{{class}}">
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+<mat-tab-group (selectedTabChange)="onSelectGrade($event)">
+  <mat-tab *ngFor="let class of classes; let i = index" label="{{class}}" (click)="onGradeClick(class)">
+    <div class="mat-elevation-z8">
+      <br><br><br>
+      <!--<table class="table table-responsive table-striped table-hover" style="margin-top: 5%;">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Parent Phone Number</th>
+        </tr>
+        </thead>
 
-            <ng-container matColumnDef="firstName">
-              <th mat-header-cell *matHeaderCellDef>First Name</th>
-              <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
-            </ng-container>
+        <tbody>
+        <tr *ngFor="let learner of userInfo; let i = index">
+          <mat-accordion displayMode="flat" [multi]="false"
+                         [hideToggle]="false">
+            <mat-expansion-panel [hideToggle]="false">
+              <mat-expansion-panel-header>{{learner.firstName}} {{learner.lastName}}</mat-expansion-panel-header>
+              Panel body
+              <mat-action-row>
+                <button mat-button (click)="onAction($event)">Action1</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </tr>
+        </tbody>
+      </table>-->
+      <mat-accordion *ngFor="let learner of userInfo; let i = index" displayMode="flat" [multi]="false"
+                     [hideToggle]="false">
+        <mat-expansion-panel [hideToggle]="false" expanded="true">
+          <mat-expansion-panel-header>
+              <h2>
+                {{i + 1}}
+              </h2>
 
-            <ng-container matColumnDef="lastName">
-              <th mat-header-cell *matHeaderCellDef>Last Name</th>
-              <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
-            </ng-container>
+              <h2 style="margin-left: 30%; margin-right: 30%;">
+                {{learner.firstName}} {{learner.lastName}}
+              </h2>
+              <h2>
+                {{learner.date.toString().substring(0, 10)}}
+              </h2>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </mat-expansion-panel-header>
+          <div class="row" style="font-weight: bolder">
+            <div class="col">First Name</div>
+            <div class="col">Last Name</div>
+            <div class="col">Date Recorded</div>
+            <div class="col"></div>
+          </div>
 
-            <mat-paginator [length]="allData.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
-                           showFirstLastButtons></mat-paginator>
-          </table>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+          <div class="row">
+            <div class="col">{{learner.firstName}}</div>
+            <div class="col">{{learner.lastName}}</div>
+            <div class="col">{{learner.date.toString().substring(0, 10)}}</div>
+            <div class="col"></div>
+          </div>
+          <br><br>
+
+          <div class="row" style="font-weight: bolder">
+            <div class="col">Questions</div>
+            <div class="col">Answers</div>
+          </div>
+          <hr>
+          <div class="row" *ngFor="let questionAnswer of learner?.questionsAnswers; let qa = index;">
+            <div class="col">
+              {{questionAnswer.question}}
+            </div>
+            <div class="col">
+              <mat-radio-group disabled aria-label="Select an option" color="primary">
+                <mat-radio-button [checked]="questionAnswer.answer.match('1')" value="1">Yes</mat-radio-button>&nbsp;
+                <mat-radio-button [checked]="questionAnswer.answer.match('2')" value="2">No</mat-radio-button>
+              </mat-radio-group>
+              <br>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-tab>
+</mat-tab-group>

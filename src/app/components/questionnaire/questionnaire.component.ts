@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -55,7 +56,7 @@ export class QuestionnaireComponent implements OnInit {
   maxDate: Date;
   minDate: Date;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService) {
     const currentDate = new Date();
     this.maxDate = new Date(currentDate);
     this.minDate = new Date(currentDate);
@@ -68,6 +69,7 @@ export class QuestionnaireComponent implements OnInit {
       lastName: new FormControl(null, Validators.required),
       class: new FormControl(null, Validators.required),
       date: new FormControl(this.maxDate.toISOString(), Validators.required),
+      parentPhoneNumber: new FormControl(null, Validators.required),
       questionsAnswers: new FormArray(this.questionsAnswers),
     });
   }
@@ -79,5 +81,9 @@ export class QuestionnaireComponent implements OnInit {
 
   onSubmit(formVal: FormGroup) {
     console.log(formVal.value);
+    this.userService.saveUserInformation(formVal.value)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }
