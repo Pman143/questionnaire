@@ -101,12 +101,14 @@
         </mat-expansion-panel>
       </mat-accordion>
       <br>
-      {{questionnaireForm.value | json}}
       <div class="row" style="margin-left: 3px;">
         <button [disabled]="questionnaireForm.invalid" type="submit" class="login-button" mat-raised-button
                 color="primary">
           Submit
         </button>
+        <div style="margin-left: 50px;"  class="alert alert-success" role="alert" *ngIf="isSuccess">
+          Information Submitted Succesfully.
+        </div>
         <div style="margin-left: 35px;" *ngIf="false">
           <mat-spinner [strokeWidth]="5" [diameter]="40"></mat-spinner>
         </div>

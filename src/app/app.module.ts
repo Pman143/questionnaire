@@ -29,6 +29,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {HttpClientModule} from '@angular/common/http';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatTableModule,
     MatPaginatorModule,
     MatDividerModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

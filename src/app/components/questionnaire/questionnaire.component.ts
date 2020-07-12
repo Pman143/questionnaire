@@ -8,6 +8,8 @@ import {UserService} from '../../services/user.service';
   styleUrls: ['./questionnaire.component.css']
 })
 export class QuestionnaireComponent implements OnInit {
+  submitted = false;
+  isSuccess = false;
   temperatureValue = 0.0;
   classes: Array<string> = [
     'Grade 1',
@@ -29,27 +31,27 @@ export class QuestionnaireComponent implements OnInit {
   questionsAnswers = [
     new FormGroup({
       question: new FormControl(this.questions[0], Validators.required),
-      answer: new FormControl(''),
+      answer: new FormControl('', Validators.required),
     }),
     new FormGroup({
       question: new FormControl(this.questions[1], Validators.required),
-      answer: new FormControl(''),
+      answer: new FormControl('', Validators.required),
     }),
     new FormGroup({
       question: new FormControl(this.questions[2], Validators.required),
-      answer: new FormControl(''),
+      answer: new FormControl('', Validators.required),
     }),
     new FormGroup({
       question: new FormControl(this.questions[3], Validators.required),
-      answer: new FormControl(''),
+      answer: new FormControl('', Validators.required),
     }),
     new FormGroup({
       question: new FormControl(this.questions[4], Validators.required),
-      answer: new FormControl(''),
+      answer: new FormControl('', Validators.required),
     }),
     new FormGroup({
       question: new FormControl(this.questions[5], Validators.required),
-      answer: new FormControl(''),
+      answer: new FormControl('', Validators.required),
     })
   ];
   questionnaireForm: FormGroup;
@@ -81,8 +83,15 @@ export class QuestionnaireComponent implements OnInit {
 
   onSubmit(formVal: FormGroup) {
     console.log(formVal.value);
+    this.submitted = true;
     this.userService.saveUserInformation(formVal.value)
       .subscribe((res) => {
+        if (res['message'].toLowerCase().includes('successfully')) {
+          this.isSuccess = true;
+          setTimeout(() => {
+            this.isSuccess = false;
+          }, 3000);
+        }
         console.log(res);
       });
   }
