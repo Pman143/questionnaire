@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   onChangeGrade(event: any) {
     this.isLoading = true;
     this.userInfo = [];
+    this.searchTerm = event;
     setTimeout(() => {
       this.getUserInfoByGrade(event);
     }, 200);

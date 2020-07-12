@@ -9,7 +9,7 @@
 </mat-form-field>
 
 <br>
-<h2 *ngIf="!isLoading" style="margin-left: 45%;">Found {{userInfo.length}} Results.</h2>
+<h2 *ngIf="!isLoading" style="margin-left: 45%;">Found {{userInfo.length}} Results For {{searchTerm}}.</h2>
 
 <div class="mat-elevation-z8" *ngIf="userInfo.length && !isLoading">
   <br><br><br>
