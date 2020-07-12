@@ -2,34 +2,9 @@
   <mat-tab *ngFor="let class of classes; let i = index" label="{{class}}" (click)="onGradeClick(class)">
     <div class="mat-elevation-z8">
       <br><br><br>
-      <!--<table class="table table-responsive table-striped table-hover" style="margin-top: 5%;">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Parent Phone Number</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr *ngFor="let learner of userInfo; let i = index">
-          <mat-accordion displayMode="flat" [multi]="false"
-                         [hideToggle]="false">
-            <mat-expansion-panel [hideToggle]="false">
-              <mat-expansion-panel-header>{{learner.firstName}} {{learner.lastName}}</mat-expansion-panel-header>
-              Panel body
-              <mat-action-row>
-                <button mat-button (click)="onAction($event)">Action1</button>
-              </mat-action-row>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </tr>
-        </tbody>
-      </table>-->
       <mat-accordion *ngFor="let learner of userInfo; let i = index" displayMode="flat" [multi]="false"
                      [hideToggle]="false">
-        <mat-expansion-panel [hideToggle]="false" expanded="true">
+        <mat-expansion-panel [hideToggle]="false">
           <mat-expansion-panel-header>
               <h2>
                 {{i + 1}}
@@ -47,16 +22,16 @@
             <div class="col">First Name</div>
             <div class="col">Last Name</div>
             <div class="col">Date Recorded</div>
-            <div class="col"></div>
+            <div class="col">Phone Number(parent/guardian)</div>
           </div>
 
           <div class="row">
             <div class="col">{{learner.firstName}}</div>
             <div class="col">{{learner.lastName}}</div>
             <div class="col">{{learner.date.toString().substring(0, 10)}}</div>
-            <div class="col"></div>
+            <div class="col">{{learner.parentPhoneNumber}}</div>
           </div>
-          <br><br>
+          <br>
 
           <div class="row" style="font-weight: bolder">
             <div class="col">Questions</div>

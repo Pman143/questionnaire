@@ -23,7 +23,8 @@ export class UserLoginComponent implements OnInit {
   }
 
   onSubmitForm(userLoginForm: FormGroup) {
-    console.log(userLoginForm.value);
-    this.route.navigate(['questionnaire']);
+    if (userLoginForm.value.username.toLowerCase() === 'admin' && userLoginForm.value.password.toLowerCase() === 'admin123') {
+      this.route.navigate(['home']);
+    }
   }
 }

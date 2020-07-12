@@ -2,8 +2,9 @@
   <mat-toolbar-row>
     <span>Questionnaire</span>
     <span class="example-spacer"></span>
-    <span style="margin-right: 5%;cursor: pointer;" (click)="onLogin()">Login</span>
-    <span style="margin-right: 2%;cursor: pointer;" (click)="onRegister()">Register</span>
+    <span style="margin-right: 5%;cursor: pointer;" (click)="onQuestionnaire()">Complete Questionnaire(parent/guardian)</span>
+    <span style="margin-right: 5%;cursor: pointer;" (click)="onLogin()">Admin Login</span>
+    <span style="margin-right: 2%;cursor: pointer;" (click)="onRegister()" hidden>Register</span>
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>

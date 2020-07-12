@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'school-screening-app-ui';
 
   constructor(private route: Router) {
   }
@@ -18,5 +17,9 @@ export class AppComponent {
 
   onRegister() {
     this.route.navigate(['user-register']);
+  }
+
+  onQuestionnaire() {
+    this.route.navigate(['questionnaire']);
   }
 }
